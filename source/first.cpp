@@ -16,10 +16,10 @@ int main(){
 	std::cout << "SDL failed to create a new window.\nSDL Error code: " << SDL_GetError() << std::endl;
 	return(-2);
     }
-    r = SDL_CreateRenderer(vw, -1, 0);
+    r = SDL_CreateRenderer(w, -1, 0);
 
     //color palette is RGBA sequentially
-    SDL_SetRenderDrawColor(pr, 128, 128, 0, 255);
+    SDL_SetRenderDrawColor(r, 128, 128, 0, 255);
     SDL_RenderClear(r);
     SDL_RenderPresent(r);
 
@@ -27,7 +27,7 @@ int main(){
     SDL_Delay(5000);
 
     //cleanup
-    SDL_DestroyWindow(vw);
+    SDL_DestroyWindow(w);
     SDL_Quit();
     return(0);
 }
