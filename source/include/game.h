@@ -8,54 +8,91 @@
     #define _game_h 1
 #endif // _game_h
 
-//compile from terminal: g++ ./test.cpp $(pkg-config --cflags --libs sdl2)
+//compile from terminal: g++ -o test ./test.cpp $(pkg-config --cflags --libs sdl2)
 
-class gstate{
-    SDL_Window *gwindow = NULL;
-    SDL_Surface *gsurface = NULL;
-    SDL_Surface *gimg = NULL;
-    SDL_Renderer *grender = NULL;
+class game{
+    bool run;
+    SDL_Window *gwin;
+    SDL_Renderer *gren;
 public:
+    game(){
+        run = false;
+        gwin = NULL;
+        gren = NULL;
+    }
+
+    ~game(){
+
+    }
+
+    bool getrun(){
+        return(run);
+    }
+
+    bool init(){
+
+    }
+
     bool init(const char *tit, int x, int y, int ht, int wt, int flag){
         if((SDL_INIT_EVERYTHING) < 0){//failed to initialize
-            std::cout << "SDL Failed to initialise!\nSDL Error code: " << SDL_GetError() << std::endl;
+            std::cout << "SDL Failed to initialize!\nSDL Error code: " << SDL_GetError() << std::endl;
             return(false);
         }
-        gwindow = SDL_CreateWindow(tit, x, y, wt, ht, flag);
-        if(gwindow == 0){//failed to create a new window
-            std::cout << "SDL failed to create a new window!\nSDL Error code: " << SDL_GetError() << std::endl;
+
+        std::cout << "SDL successfully initialized!" << std::endl;
+        gwin = SDL_CreateWindow(tit, x, y, wt, ht, flag);
+
+        if(gwin == NULL){//failed to create a new window
+            std::cout << "SDL Window initialization failed!\nSDL Error code: " << SDL_GetError() << std::endl;
             return(false);
         }
-        //get window surface
-        gsurface = SDL_GetWindowSurface(gwindow);
-        grender = SDL_CreateRenderer(gwindow, -1, 0);
+
+        std::cout << "SDL successfully created a new window!" << std::endl;
+        //create render
+        gren = SDL_CreateRenderer(gwin, -1, 0);
+
+        if(gren == NULL){ // renderer init failed
+            std::cout << "SDL Renderer initialization failed!\nSDL Error code: " << SDL_GetError() << std::endl;
+            return(false);
+        }
+
+        std::cout << "Everything initialized successfully!" << std::endl;
+        SDL_SetRenderDrawColor(gren,255,255,255,255);
+        run = true;
         return(true);
     }
-    bool load_media(const char *path) {
-        //Load BMP image
-        gimg = SDL_LoadBMP(path);
-        if(gimg == 0) { //failed to load media
-            std::cout << "Unable to load image " << path << "!\nSDL Error: " << SDL_GetError() << std::endl;
-            return(false);
-        }
-        return(true);
-    }
+
     void render(){
-        //color palette is RGBA
-        //A = alpha,transparency/opacity
-        SDL_SetRenderDrawColor(grender, 0, 0, 0, 128);
-        SDL_RenderClear(grender);
-        SDL_RenderPresent(grender);
+        SDL_RenderClear(gren); // clear the renderer to the draw color
+        SDL_RenderPresent(gren); // draw to the screen
     }
-    void update(){
 
-    }
     void handle_event(){
-
+        SDL_Event gevent;
+        if(SDL_PollEvent(&gevent)){
+            switch (gevent.type){
+                case SDL_QUIT:{
+                    run = false;
+                    break;
+                }
+                default: break;
+            }
+        }
     }
-    void cleanup(){
-        SDL_DestroyWindow(gwindow);
+
+    void update(){
+        //add body
+    }
+
+    void close(){
+        std::cout << "Starting cleanup job: " << std::endl;
+        SDL_DestroyRenderer(gren);
+        std::cout << "SDL Renderer Destroyed!" << std::endl;
+        gren = NULL;
+        SDL_DestroyWindow(gwin);
+        std::cout << "SDL Window Destroyed!" << std::endl;
+        gwin = NULL;
         SDL_Quit();
+        std::cout << "SDL Deinitialized!\nSDL Quit!" << std::endl;
     }
 };
-
