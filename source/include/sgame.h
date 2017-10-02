@@ -11,20 +11,22 @@
 //compile from terminal: g++ -o test ./test.cpp $(pkg-config --cflags --libs sdl2)
 
 class skeletal_game{
-	bool m_bRunning;
+    SDL_Window *gwin;
+    SDL_Renderer *gren;
+    SDL_Texture *gtex;
+    SDL_Rect src, dest;
+    bool run;
   public:
-	skeletal_game() {}
-	~skeletal_game() {}
+	skeletal_game();
+//	~skeletal_game();
 	// simply set the running variable to true
-	void init(){
-		m_bRunning = true;
-	}
-	void render(){}
-	void update(){}
-	void handleEvents(){}
-	void clean(){}
+	bool init(const char*, int, int, int, int, int);
+	void render();
+	void update();
+	void handleEvents();
+	void clean();
 	// a function to access the private running variable
 	bool getrun(){
-		return m_bRunning;
+		return(run);
 	}
 };
