@@ -1,6 +1,6 @@
 #include "include/sgame.h"
 
-//compile from terminal: g++ -o experimental ./experimental.cpp $(pkg-config --cflags --libs sdl2)
+//compile from terminal: g++ -o animated_img ./animated_img.cpp $(pkg-config --cflags --libs sdl2)
 
 skeletal_game::skeletal_game(){
     run = false;
@@ -32,7 +32,7 @@ bool skeletal_game::init(const char *tit, int x, int y, int ht, int wt, int flag
     }
 
     std::cout << "Everything initialized successfully!" << std::endl;
-    SDL_Surface* tmp = SDL_LoadBMP("media/char3(24).bmp");
+    SDL_Surface* tmp = SDL_LoadBMP("media/char3(bmp3).bmp");
     gtex = SDL_CreateTextureFromSurface(gren, tmp);
     SDL_FreeSurface(tmp);
     //SDL_QueryTexture(gtex, NULL, NULL, &src.w, &src.h);

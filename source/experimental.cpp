@@ -32,7 +32,7 @@ bool skeletal_game::init(const char *tit, int x, int y, int ht, int wt, int flag
     }
 
     std::cout << "Everything initialized successfully!" << std::endl;
-    SDL_Surface* tmp = SDL_LoadBMP("media/char3(24).bmp");
+    SDL_Surface* tmp = SDL_LoadBMP("media/char3(bmp3).bmp");
     gtex = SDL_CreateTextureFromSurface(gren, tmp);
     SDL_FreeSurface(tmp);
     //SDL_QueryTexture(gtex, NULL, NULL, &src.w, &src.h);
@@ -57,7 +57,8 @@ void skeletal_game::update()
 
 void skeletal_game::render(){
     SDL_RenderClear(gren); // clear the renderer to the draw color
-    SDL_RenderCopy(gren, gtex, &src, &dest);// display image
+    //SDL_RenderCopy(gren, gtex, &src, &dest);// display image
+    SDL_RenderCopyEx(gren, gtex, &src, &dest, 0, 0, SDL_FLIP_HORIZONTAL); // pass in the horizontal flip
     SDL_RenderPresent(gren); // draw to the screen
 }
 
