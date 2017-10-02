@@ -1,6 +1,6 @@
 #include "include/game2.h"
 
-//compile from terminal: g++ ./fourth.cpp $(pkg-config --cflags --libs sdl2)
+//compile from terminal: g++ -o load_bmp ./load_bmp.cpp $(pkg-config --cflags --libs sdl2)
 
 int main(){
   game obj;

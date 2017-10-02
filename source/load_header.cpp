@@ -1,6 +1,6 @@
 #include "include/game.h"
 
-//compile from terminal: g++ ./third.cpp $(pkg-config --cflags --libs sdl2)
+//compile from terminal: g++ -o load_header ./load_header.cpp $(pkg-config --cflags --libs sdl2)
 
 int main(){
   game obj;

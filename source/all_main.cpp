@@ -1,7 +1,7 @@
 #include <SDL2/SDL.h>
 #include <iostream>
 
-//compile from terminal: g++ ./first.cpp $(pkg-config --cflags --libs sdl2)
+//compile from terminal: g++ -o all_main ./all_main.cpp $(pkg-config --cflags --libs sdl2)
 
 int main(){
     if((SDL_INIT_EVERYTHING) < 0){//failed to initialize

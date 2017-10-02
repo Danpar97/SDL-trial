@@ -1,6 +1,6 @@
 #include "include/sgame.h"
 
-//compile from terminal: g++ -o experimental ./experimental.cpp $(pkg-config --cflags --libs sdl2)
+//compile from terminal: g++ -o load_bmp_part ./load_bmp_part.cpp $(pkg-config --cflags --libs sdl2)
 
 skeletal_game::skeletal_game(){
     run = false;

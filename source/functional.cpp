@@ -1,7 +1,7 @@
 #include <SDL2/SDL.h>
 #include <iostream>
 
-//compile from terminal: g++ ./second.cpp $(pkg-config --cflags --libs sdl2)
+//compile from terminal: g++ -o functional ./functional.cpp $(pkg-config --cflags --libs sdl2)
 
 SDL_Window *w = 0;
 SDL_Renderer *r = 0;
