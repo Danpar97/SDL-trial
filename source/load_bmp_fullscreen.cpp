@@ -32,32 +32,27 @@ bool skeletal_game::init(const char *tit, int x, int y, int ht, int wt, int flag
     }
 
     std::cout << "Everything initialized successfully!" << std::endl;
-    SDL_Surface* tmp = SDL_LoadBMP("media/char3(24).bmp");
+    SDL_Surface* tmp = SDL_LoadBMP("media/hello_world.bmp");
     gtex = SDL_CreateTextureFromSurface(gren, tmp);
     SDL_FreeSurface(tmp);
-    //SDL_QueryTexture(gtex, NULL, NULL, &src.w, &src.h);
-    src.w = 128;
-    src.h = 82;
-    src.x = 0;
-    src.y = 0;
-    dest.x = 0;
-    dest.y = 0;
+    SDL_QueryTexture(gtex, NULL, NULL, &src.w, &src.h);
+    src.w = 180;
+    src.h = 180;
+    src.x = 20;
+    src.y = 300;
+    dest.x = 100;
+    dest.y = 100;
     dest.w = src.w;
     dest.h = src.h;
 
-    SDL_SetRenderDrawColor(gren, 0, 0, 0, 255);
+    SDL_SetRenderDrawColor(gren, 128, 128, 128, 255);
     run = true;
     return(true);
 }
 
-void skeletal_game::update()
-{
-    src.x = 128 * int(((SDL_GetTicks() / 100) % 3));
-}
-
 void skeletal_game::render(){
     SDL_RenderClear(gren); // clear the renderer to the draw color
-    SDL_RenderCopy(gren, gtex, &src, &dest);// display image
+    SDL_RenderCopy(gren, gtex, 0, 0);// display image
     SDL_RenderPresent(gren); // draw to the screen
 }
 
@@ -88,10 +83,10 @@ void skeletal_game::clean(){
 
 int main(){
     skeletal_game obj;
-    obj.init("Chapter-02", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 1024, SDL_WINDOW_SHOWN);
+    obj.init("Chapter-02", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 1024, SDL_WINDOW_FULLSCREEN);
     while(obj.getrun()){
         obj.handleEvents();
-        obj.update();
+        //obj.update();
         obj.render();
     }
     obj.clean();
