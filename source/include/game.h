@@ -29,10 +29,6 @@ public:
         return(run);
     }
 
-    bool init(){
-
-    }
-
     bool init(const char *tit, int x, int y, int ht, int wt, int flag){
         if((SDL_INIT_EVERYTHING) < 0){//failed to initialize
             std::cout << "SDL Failed to initialize!\nSDL Error code: " << SDL_GetError() << std::endl;
@@ -57,7 +53,7 @@ public:
         }
 
         std::cout << "Everything initialized successfully!" << std::endl;
-        SDL_SetRenderDrawColor(gren,255,255,255,255);
+        SDL_SetRenderDrawColor(gren, 128, 128, 128, 255);
         run = true;
         return(true);
     }
