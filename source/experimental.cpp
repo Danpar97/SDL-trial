@@ -1,7 +1,9 @@
 #include "include/sgame.h"
+#include <SDL2/SDL_image.h>
 
 //compile from terminal: g++ -o experimental ./experimental.cpp $(pkg-config --cflags --libs sdl2)
-
+// g++  -I/usr/include/SDL2 -c /home/danish/Repositories/SDL-trial/source/experimental.cpp -o /home/danish/Repositories/SDL-trial/source/experimental.o
+//g++  -o /home/danish/Repositories/SDL-trial/source/experimental /home/danish/Repositories/SDL-trial/source/experimental.o  -lSDL2 -lSDL2main -lSDL2_image
 skeletal_game::skeletal_game(){
     run = false;
     gwin = NULL;
@@ -32,12 +34,13 @@ bool skeletal_game::init(const char *tit, int x, int y, int ht, int wt, int flag
     }
 
     std::cout << "Everything initialized successfully!" << std::endl;
-    SDL_Surface* tmp = SDL_LoadBMP("media/char3(bmp3).bmp");
+    SDL_Surface *tmp = IMG_Load("media/platform/char9.png");
+    //SDL_Surface *tmp = SDL_LoadBMP("media/char3(bmp3).bmp");
     gtex = SDL_CreateTextureFromSurface(gren, tmp);
     SDL_FreeSurface(tmp);
     //SDL_QueryTexture(gtex, NULL, NULL, &src.w, &src.h);
     src.w = 128;
-    src.h = 82;
+    src.h = 182;
     src.x = 0;
     src.y = 0;
     dest.x = 0;
