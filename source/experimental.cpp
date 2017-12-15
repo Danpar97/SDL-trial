@@ -10,14 +10,14 @@ skeletal_game::skeletal_game(){
     gren = NULL;
 }
 
-bool skeletal_game::init(const char *tit, int x, int y, int ht, int wt, int flag){
+bool skeletal_game::init(const char *title, int x, int y, int ht, int wt, int flag){
     if((SDL_INIT_EVERYTHING) < 0){//failed to initialize
         std::cout << "SDL Failed to initialize!\nSDL Error code: " << SDL_GetError() << std::endl;
         return(false);
     }
 
     std::cout << "SDL successfully initialized!" << std::endl;
-    gwin = SDL_CreateWindow(tit, x, y, wt, ht, flag);
+    gwin = SDL_CreateWindow(title, x, y, wt, ht, flag);
 
     if(gwin == NULL){//failed to create a new window
         std::cout << "SDL Window initialization failed!\nSDL Error code: " << SDL_GetError() << std::endl;
@@ -34,10 +34,10 @@ bool skeletal_game::init(const char *tit, int x, int y, int ht, int wt, int flag
     }
 
     std::cout << "Everything initialized successfully!" << std::endl;
-    SDL_Surface *tmp = IMG_Load("media/platform/char9.png");
+    SDL_Surface *gsurface = IMG_Load("media/platform/char9.png");
     //SDL_Surface *tmp = SDL_LoadBMP("media/char3(bmp3).bmp");
-    gtex = SDL_CreateTextureFromSurface(gren, tmp);
-    SDL_FreeSurface(tmp);
+    gtex = SDL_CreateTextureFromSurface(gren, gsurface);
+    SDL_FreeSurface(gsurface);
     //SDL_QueryTexture(gtex, NULL, NULL, &src.w, &src.h);
     src.w = 128;
     src.h = 182;
@@ -55,7 +55,7 @@ bool skeletal_game::init(const char *tit, int x, int y, int ht, int wt, int flag
 
 void skeletal_game::update()
 {
-    src.x = 128 * int(((SDL_GetTicks() / 100) % 3));
+    src.x = 128 * int(((SDL_GetTicks() / 100) % 6));
 }
 
 void skeletal_game::render(){
