@@ -6,7 +6,6 @@
 #endif // check SDL & include
 #ifndef _game2_h
     #define _game2_h 1
-#endif // _game2_h
 
 //compile from terminal: g++ -o test ./test.cpp $(pkg-config --cflags --libs sdl2)
 
@@ -24,7 +23,9 @@ public:
     }
 
     ~game(){
-
+        run = false;
+        gwin = NULL;
+        gren = NULL;
     }
 
     bool getrun(){
@@ -106,3 +107,5 @@ public:
         std::cout << "SDL Deinitialized!\nSDL Quit!" << std::endl;
     }
 };
+
+#endif // _game2_h

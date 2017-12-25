@@ -1,7 +1,7 @@
 #include "include/sgame.h"
 #include <SDL2/SDL_image.h>
 
-//compile from terminal: g++ -o experimental ./experimental.cpp $(pkg-config --cflags --libs sdl2)
+//compile from terminal (outdated): g++ -o experimental ./experimental.cpp $(pkg-config --cflags --libs sdl2)
 // g++  -I/usr/include/SDL2 -c /home/danish/Repositories/SDL-trial/source/experimental.cpp -o /home/danish/Repositories/SDL-trial/source/experimental.o
 //g++  -o /home/danish/Repositories/SDL-trial/source/experimental /home/danish/Repositories/SDL-trial/source/experimental.o  -lSDL2 -lSDL2main -lSDL2_image
 skeletal_game::skeletal_game(){
@@ -34,11 +34,13 @@ bool skeletal_game::init(const char *title, int x, int y, int ht, int wt, int fl
     }
 
     std::cout << "Everything initialized successfully!" << std::endl;
-    SDL_Surface *gsurface = IMG_Load("media/platform/char9.png");
+    texture_manager.load("assets/platform/char9a.png", "animate", gren);
+
+    SDL_Surface *gsurface = IMG_Load("media/platform/char9a.png");
     //SDL_Surface *tmp = SDL_LoadBMP("media/char3(bmp3).bmp");
     gtex = SDL_CreateTextureFromSurface(gren, gsurface);
     SDL_FreeSurface(gsurface);
-    //SDL_QueryTexture(gtex, NULL, NULL, &src.w, &src.h);
+    SDL_QueryTexture(gtex, NULL, NULL, &src.w, &src.h);
     src.w = 128;
     src.h = 182;
     src.x = 0;
@@ -48,21 +50,22 @@ bool skeletal_game::init(const char *title, int x, int y, int ht, int wt, int fl
     dest.w = src.w;
     dest.h = src.h;
 
-    SDL_SetRenderDrawColor(gren, 0, 0, 0, 255);
+    SDL_SetRenderDrawColor(gren, 255, 0, 0, 255);
     run = true;
     return(true);
 }
 
 void skeletal_game::update()
 {
-    src.x = 128 * int(((SDL_GetTicks() / 100) % 6));
+    //src.x = 128 * int(((SDL_GetTicks() / 100) % 6));
+    current_frame = int(((SDL_GetTicks() / 100) % 6));
 }
 
 void skeletal_game::render(){
-    SDL_RenderClear(gren); // clear the renderer to the draw color
-    //SDL_RenderCopy(gren, gtex, &src, &dest);// display image
-    SDL_RenderCopyEx(gren, gtex, &src, &dest, 0, 0, SDL_FLIP_HORIZONTAL); // pass in the horizontal flip
-    SDL_RenderPresent(gren); // draw to the screen
+    SDL_RenderClear(gren);
+    texture_manager.draw("animate", 0,0, 128, 82, gren);
+    texture_manager.drawFrame("animate", 100,100, 128, 82, 1, current_frame, gren);
+    SDL_RenderPresent(gren);
 }
 
 void skeletal_game::handleEvents(){

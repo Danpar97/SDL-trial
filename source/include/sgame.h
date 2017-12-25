@@ -4,9 +4,11 @@
 #ifndef  _SDL_h
     #include <SDL2/SDL.h>
 #endif // check SDL & include
+#ifndef TEXTUREMANAGER_H_INCLUDED
+    #include "TextureManager.h"
+#endif // TEXTUREMANAGER_H_INCLUDED
 #ifndef _sgame_h
     #define _sgame_h 1
-#endif // _sgame_h
 
 //compile from terminal: g++ -o test ./test.cpp $(pkg-config --cflags --libs sdl2)
 
@@ -16,6 +18,8 @@ class skeletal_game{
     SDL_Texture *gtex;
     SDL_Rect src, dest;
     bool run;
+    int current_frame;
+    TextureManager texture_manager;
   public:
 	skeletal_game();
 //	~skeletal_game();
@@ -30,3 +34,5 @@ class skeletal_game{
 		return(run);
 	}
 };
+
+#endif // _sgame_h

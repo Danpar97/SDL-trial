@@ -6,7 +6,6 @@
 #endif // check SDL & include
 #ifndef _game_h
     #define _game_h 1
-#endif // _game_h
 
 //compile from terminal: g++ -o test ./test.cpp $(pkg-config --cflags --libs sdl2)
 
@@ -92,3 +91,5 @@ public:
         std::cout << "SDL Deinitialized!\nSDL Quit!" << std::endl;
     }
 };
+
+#endif // _game_h
