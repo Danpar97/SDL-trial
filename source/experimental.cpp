@@ -8,6 +8,7 @@ skeletal_game::skeletal_game(){
     run = false;
     gwin = NULL;
     gren = NULL;
+    current_frame = 1;
 }
 
 bool skeletal_game::init(const char *title, int x, int y, int ht, int wt, int flag){
@@ -34,9 +35,9 @@ bool skeletal_game::init(const char *title, int x, int y, int ht, int wt, int fl
     }
 
     std::cout << "Everything initialized successfully!" << std::endl;
-    texture_manager.load("assets/platform/char9a.png", "animate", gren);
-
-    SDL_Surface *gsurface = IMG_Load("media/platform/char9a.png");
+    texture_manager.load("media/platform/char9b.png", "animate", gren);
+    /*
+    SDL_Surface *gsurface = IMG_Load("media/platform/char9b.png");
     //SDL_Surface *tmp = SDL_LoadBMP("media/char3(bmp3).bmp");
     gtex = SDL_CreateTextureFromSurface(gren, gsurface);
     SDL_FreeSurface(gsurface);
@@ -49,6 +50,7 @@ bool skeletal_game::init(const char *title, int x, int y, int ht, int wt, int fl
     dest.y = 0;
     dest.w = src.w;
     dest.h = src.h;
+    */
 
     SDL_SetRenderDrawColor(gren, 255, 0, 0, 255);
     run = true;
@@ -63,8 +65,8 @@ void skeletal_game::update()
 
 void skeletal_game::render(){
     SDL_RenderClear(gren);
-    texture_manager.draw("animate", 0,0, 128, 82, gren);
-    texture_manager.drawFrame("animate", 100,100, 128, 82, 1, current_frame, gren);
+    texture_manager.draw("animate", 0, 0, 128, 54, gren);
+    texture_manager.drawFrame("animate", 100,100, 128, 54, 1, current_frame, gren);
     SDL_RenderPresent(gren);
 }
 
