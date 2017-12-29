@@ -9,7 +9,7 @@ set -e    # halt on first error
 CPP='g++'
 
 # be aggressive about warnings and errors
-W_FLAGS='-Wall -Wextra -Werror -Wfatal-errors -Wpedantic -pedantic-errors'
+W_FLAGS='-Wall -Wextra -Werror -Wfatal-errors -Wpedantic -pedantic-errors -std=c++11'
 INC_FLAGS='-I/usr/include/SDL2'
 SDL_FLAGS='-lSDL2 -lSDL2main -lSDL2_image'
 
