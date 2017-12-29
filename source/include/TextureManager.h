@@ -4,20 +4,25 @@
 #ifndef _SDL_IMAGE_H
     #include <SDL2/SDL_image.h>
 #endif // _SDL_IMAGE_H
-#ifndef TEXTUREMANAGER_H_INCLUDED
-#define TEXTUREMANAGER_H_INCLUDED
+#ifndef TEXTUREMANAGER_H
+#define TEXTUREMANAGER_H
 
 class TextureManager{
     private:
         std::map<std::string, SDL_Texture*> texture_map;
     public:
+        static TextureManager* getInstance();
+
         bool load(std::string fileName, std::string id, SDL_Renderer* render);
         // draw
         void draw(std::string id, int x, int y, int width, int height, SDL_Renderer* render, SDL_RendererFlip flip = SDL_FLIP_NONE);
         // drawframe
         void drawFrame(std::string id, int x, int y, int width, int height, int current_row, int current_frame, SDL_Renderer* render, SDL_RendererFlip flip = SDL_FLIP_NONE);
-        //TextureManager();
         //~TextureManager();
+    private:
+        TextureManager() {}
+        TextureManager(TextureManager const&) = delete;
+        void operator=(TextureManager const&) = delete;
 };
 
 /*
@@ -25,6 +30,15 @@ class TextureManager{
 -----------------------------------------------------------Definitions------------------------------------------------------------------
 
 */
+
+//static TextureManager* TextureManager::instance = 0;
+
+static TextureManager* TextureManager::getInstance(){
+    if(instance == 0){
+        static TextureManager* instance = new TextureManager();
+    }
+    return instance;
+}
 
 bool TextureManager::load(std::string fileName, std::string id, SDL_Renderer* render) {
     SDL_Surface* temp_surface = IMG_Load(fileName.c_str());
