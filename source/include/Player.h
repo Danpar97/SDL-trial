@@ -10,11 +10,13 @@ public:
     }
 
     void draw(SDL_Renderer* p_renderer){
+        std::cout << "draw player";
         GameObject::draw(p_renderer);
     }
 
     void update(){
-         go_x -= 1;
+        std::cout << "update player";
+        go_x -= 1;
     }
     /*
     void update(){
@@ -24,8 +26,8 @@ public:
     }*/
 
     void clean(){
-        GameObject::clean();
         std::cout << "clean player";
+        GameObject::clean();
     }
 };
 

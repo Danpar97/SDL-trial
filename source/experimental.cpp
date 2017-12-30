@@ -38,7 +38,7 @@ bool skeletal_game::init(const char *title, int x, int y, int ht, int wt, int fl
     g_go.load(100, 100, 128, 82, "animate");
     g_player.load(300, 300, 128, 82, "animate");
 /*
-    if(!TextureManager::Instance()->load("media/platform/char9b.png", "animate", gren)){
+    if(!TextureManager::getInstance()->load("media/platform/char9b.png", "animate", gren)){
         return false;
     }
 */
@@ -59,9 +59,9 @@ void skeletal_game::render(){
     g_go.draw(gren);
     g_player.draw(gren);
     /*
-    TextureManager::Instance()->draw("animate", 0,0, 128, 54, gren);
+    TextureManager::getInstance()->draw("animate", 0,0, 128, 54, gren);
     //texture_manager.draw("animate", 0, 0, 128, 54, gren);
-    TextureManager::Instance()->drawFrame("animate", 100,100, 128, 54, 1, current_frame, gren);
+    TextureManager::getInstance()->drawFrame("animate", 100,100, 128, 54, 1, current_frame, gren);
     //texture_manager.drawFrame("animate", 100,100, 128, 54, 1, current_frame, gren);
     */
     SDL_RenderPresent(gren);
