@@ -35,13 +35,16 @@ bool skeletal_game::init(const char *title, int x, int y, int ht, int wt, int fl
     std::cout << "Everything initialized successfully!" << std::endl;
     //texture_manager.load("media/platform/char9b.png", "animate", gren);
 
-    g_go.load(100, 100, 128, 82, "animate");
-    g_player.load(300, 300, 128, 82, "animate");
-/*
-    if(!TextureManager::getInstance()->load("media/platform/char9b.png", "animate", gren)){
-        return false;
+    if(!TextureManager::getInstance()->load("media/platform/char9b.png", "Lion", gren)){
+        return(false);
     }
-*/
+
+    if(!TextureManager::getInstance()->load("media/platform/char10b.png", "Dragon", gren)){
+        return(false);
+    }
+    g_go.load(100, 100, 128, 82, "Lion");
+    g_player.load(300, 300, 128, 82, "Dragon");
+
     SDL_SetRenderDrawColor(gren, 255, 0, 0, 255);
     run = true;
     return(true);

@@ -21,11 +21,7 @@
 class skeletal_game{
     SDL_Window *gwin;
     SDL_Renderer *gren;
-    //SDL_Texture *gtex;
-    //SDL_Rect src, dest;
     bool run;
-    //int current_frame;
-    //TextureManager texture_manager;
     GameObject g_go;
     Player g_player;
   public:

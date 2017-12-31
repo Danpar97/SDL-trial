@@ -70,4 +70,6 @@ class TextureManager{
         //~TextureManager();
 };
 
+TextureManager* TextureManager::instance = NULL;
+
 #endif // TEXTUREMANAGER_H_INCLUDED
