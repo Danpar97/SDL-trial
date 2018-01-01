@@ -7,8 +7,8 @@
 #ifndef _SDL_IMAGE_H
     #include <SDL2/SDL_image.h>
 #endif // _SDL_IMAGE_H
-#ifndef TEXTUREMANAGER_H
-#define TEXTUREMANAGER_H
+#ifndef __TEXTUREMANAGER_H
+#define __TEXTUREMANAGER_H
 
 class TextureManager{
     private:

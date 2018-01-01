@@ -1,8 +1,9 @@
-#ifndef _GAMEOBJECT_H
+#ifndef __GAMEOBJECT_H
 #include "GameObject.h"
 #endif // _GAMEOBJECT_H
-#ifndef _PLAYER_H
-#define _PLAYER_H
+#ifndef __PLAYER_H
+#define __PLAYER_H
+
 class Player : public GameObject{ // inherit from GameObject
 public:
     void load(int x, int y, int width, int height, std::string textureID){
@@ -10,13 +11,14 @@ public:
     }
 
     void draw(SDL_Renderer* p_renderer){
-        std::cout << "draw player";
+        std::cout << "draw player" << std::endl;
         GameObject::draw(p_renderer);
     }
 
     void update(){
-        std::cout << "update player";
+        std::cout << "update player" << std::endl;
         go_x -= 1;
+        //current_frame = int(((SDL_GetTicks() / 100) % 6));
     }
     /*
     void update(){
@@ -26,7 +28,7 @@ public:
     }*/
 
     void clean(){
-        std::cout << "clean player";
+        std::cout << "clean player" << std::endl;
         GameObject::clean();
     }
 };

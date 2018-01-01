@@ -42,31 +42,49 @@ bool skeletal_game::init(const char *title, int x, int y, int ht, int wt, int fl
     if(!TextureManager::getInstance()->load("media/platform/char10b.png", "Dragon", gren)){
         return(false);
     }
-    g_go.load(100, 100, 128, 82, "Lion");
-    g_player.load(300, 300, 128, 82, "Dragon");
+
+    if(!TextureManager::getInstance()->load("media/platform/char3a.png", "Elephant", gren)){
+        return(false);
+    }
+
+    g_go = new GameObject();
+    g_player = new Player();
+    g_enemy = new Enemy();
+
+    g_go->load(100, 100, 128, 82, "Lion");
+    g_player->load(300, 300, 128, 82, "Dragon");
+    g_enemy->load(0, 0, 136, 82, "Elephant");
+
+    g_game_objects.push_back(g_go);
+    g_game_objects.push_back(g_player);
+    g_game_objects.push_back(g_enemy);
 
     SDL_SetRenderDrawColor(gren, 255, 0, 0, 255);
     run = true;
     return(true);
 }
 
-void skeletal_game::update()
-{
-    g_go.update();
-    g_player.update();
-    //current_frame = int(((SDL_GetTicks() / 100) % 6));
+void skeletal_game::draw(){
+    for(std::vector<GameObject*>::size_type i = 0; i != g_game_objects.size(); ++i){
+        g_game_objects[i]->draw(gren);
+    }
+}
+
+void skeletal_game::update(){
+    // loop through and update our objects
+    for(std::vector<GameObject*>::size_type i = 0; i != g_game_objects.size(); ++i){
+        g_game_objects[i]->update();
+    }
 }
 
 void skeletal_game::render(){
     SDL_RenderClear(gren);
-    g_go.draw(gren);
-    g_player.draw(gren);
-    /*
-    TextureManager::getInstance()->draw("animate", 0,0, 128, 54, gren);
-    //texture_manager.draw("animate", 0, 0, 128, 54, gren);
-    TextureManager::getInstance()->drawFrame("animate", 100,100, 128, 54, 1, current_frame, gren);
-    //texture_manager.drawFrame("animate", 100,100, 128, 54, 1, current_frame, gren);
-    */
+
+    // loop through our objects and draw them
+    for(std::vector<GameObject*>::size_type i = 0; i != g_game_objects.size(); ++i){
+        g_game_objects[i]->draw(gren);
+    }
+
     SDL_RenderPresent(gren);
 }
 
@@ -97,7 +115,7 @@ void skeletal_game::clean(){
 
 int main(){
     skeletal_game obj;
-    obj.init("Chapter-02", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 1024, SDL_WINDOW_SHOWN);
+    obj.init("Chapter-03", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 1024, SDL_WINDOW_SHOWN);
     while(obj.getrun()){
         obj.handleEvents();
         obj.update();
